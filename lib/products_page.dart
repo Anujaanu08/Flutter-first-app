@@ -3,12 +3,33 @@ import 'package:flutter_application_1/product_detail.dart';
 
 class ProductPage extends StatelessWidget {
   final List<Map<String, dynamic>> products = [
-    {"name": "Laptop", "price": "\$999", "image": "assets/Laptop.jpg"},
-    {"name": "Smartphone", "price": "\$699", "image": "assets/smartphone.jpg"},
-    {"name": "Headphones", "price": "\$199", "image": "assets/headphone.jpg"},
-    {"name": "Camera", "price": "\$499", "image": "assets/camera.jpg"},
+    {
+      "name": "Laptop",
+      "price": "\$999",
+      "image": "assets/Laptop.jpg",
+      "quantity": 10
+    },
+    {
+      "name": "Smartphone",
+      "price": "\$699",
+      "image": "assets/smartphone.jpg",
+      "quantity": 5
+    },
+    {
+      "name": "Headphones",
+      "price": "\$199",
+      "image": "assets/headphone.jpg",
+      "quantity": 20
+    },
+    {
+      "name": "Camera",
+      "price": "\$499",
+      "image": "assets/camera.jpg",
+      "quantity": 15
+    },
   ];
 
+  ProductPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +54,13 @@ class ProductPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: InkWell(
+                //responds to touch with a ripple effect.
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProductDetailPage(product: products[index]),
+                      builder: (context) =>
+                          ProductDetailPage(product: products[index]),
                     ),
                   );
                 },
@@ -50,14 +73,15 @@ class ProductPage extends StatelessWidget {
                       child: Image.asset(
                         products[index]['image'],
                         width: double.infinity,
-                        height: 200,
+                        height: 150,
                         fit: BoxFit.cover,
                       ),
                     ),
                     SizedBox(height: 10),
                     Text(
                       products[index]['name'],
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       products[index]['price'],

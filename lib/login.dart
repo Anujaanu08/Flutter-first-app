@@ -4,6 +4,7 @@ import 'package:flutter_application_1/products_page.dart';
 
 // Login Page - Stateful widget to manage user input
 class LoginPage extends StatefulWidget {
+   const LoginPage({super.key});
   @override
   _LoginPageState createState() => _LoginPageState();
 }

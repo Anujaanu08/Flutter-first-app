@@ -8,6 +8,9 @@ void main() {
 
 // Root widget of the application
 class MyApp extends StatelessWidget {
+  // Add the named 'key' parameter
+ const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
