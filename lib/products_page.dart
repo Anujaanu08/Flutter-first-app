@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/product_detail.dart';
+import 'package:flutter_application_1/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
   final List<Map<String, dynamic>> products = [
@@ -59,10 +61,22 @@ class ProductPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          ProductDetailPage(product: products[index]),
+                      builder: (context) => ChangeNotifierProvider(
+                        create: (_) =>
+                            ProductProvider(products[index]['quantity']),
+                        child: ProductDetailPage(product: products[index]),
+                      ),
                     ),
                   );
+
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) =>
+                  //         ProductDetailPage(product: products[index]),
+                  //   ),
+                  // );
+                  
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
