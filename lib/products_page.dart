@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/product_detail.dart';
 import 'package:flutter_application_1/product_provider.dart';
 import 'package:provider/provider.dart';
+import 'cart_notifier.dart';
 
 class ProductPage extends StatelessWidget {
   final List<Map<String, dynamic>> products = [
@@ -31,7 +32,10 @@ class ProductPage extends StatelessWidget {
     },
   ];
 
-  ProductPage({super.key});
+  final CartNotifier cartNotifier;
+
+  ProductPage({required this.cartNotifier, super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,19 +68,13 @@ class ProductPage extends StatelessWidget {
                       builder: (context) => ChangeNotifierProvider(
                         create: (_) =>
                             ProductProvider(products[index]['quantity']),
-                        child: ProductDetailPage(product: products[index]),
+                        child: ProductDetailPage(
+                          product: products[index],
+                          cartNotifier: cartNotifier,
+                        ),
                       ),
                     ),
                   );
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) =>
-                  //         ProductDetailPage(product: products[index]),
-                  //   ),
-                  // );
-                  
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,19 +105,6 @@ class ProductPage extends StatelessWidget {
             );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Shopping cart feature coming soon!"),
-              duration: Duration(seconds: 2),
-              backgroundColor: Colors.green,
-            ),
-          );
-        },
-        backgroundColor: Colors.blueAccent,
-        child: Icon(Icons.shopping_bag, color: Colors.white),
       ),
     );
   }

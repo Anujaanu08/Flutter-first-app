@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'product_provider.dart';
+import 'cart_notifier.dart';
 
 class ProductDetailPage extends StatelessWidget {
   final Map<String, dynamic> product;
+  final CartNotifier cartNotifier;
 
-  const ProductDetailPage({required this.product, super.key});
+  const ProductDetailPage({required this.product, required this.cartNotifier, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,15 @@ class ProductDetailPage extends StatelessWidget {
                 onPressed: () {
                   if (productProvider.quantity > 0) {
                     productProvider.addToCart();
+                    cartNotifier.value = [
+                      ...cartNotifier.value,
+                      {
+                        'name': product['name'],
+                        'image': product['image'],
+                        'price': product['price'],
+                      }
+                    ];
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text("${product['name']} added to cart!"),

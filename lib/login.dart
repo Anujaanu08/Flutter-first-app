@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/products_page.dart';
 
 // Login Page - Stateful widget to manage user input
 class LoginPage extends StatefulWidget {
-   const LoginPage({super.key});
+  const LoginPage({super.key});
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -31,20 +30,15 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         // Navigate to ProductPage after successful login
+        Navigator.pushReplacementNamed(context, '/user');
 
-        //user can't go back to the login page
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ProductPage()),
-        )
+        //// user can go back to the login page by clicking back key
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => ProductPage()),
+        // );
 
-            //// user can go back to the login page by clicking back key
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ProductPage()),
-            // );
-
-            ;
+        ;
       } else {
         CustomSnackBar.showSnackBar(
           context,
@@ -103,8 +97,11 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset("assets/login.png",width: 50,height: 50,fit:BoxFit.cover),
-                        SizedBox(width: 10,),
+                        Image.asset("assets/login.png",
+                            width: 50, height: 50, fit: BoxFit.cover),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           "Welcome Back!",
                           style: TextStyle(

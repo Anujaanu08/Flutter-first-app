@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/homePage.dart';
 import 'package:flutter_application_1/login.dart';
+import 'package:flutter_application_1/product_provider.dart';
+import 'package:flutter_application_1/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 // Entry point of the Flutter application
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductProvider(10)),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 // Root widget of the application
 class MyApp extends StatelessWidget {
   // Add the named 'key' parameter
- const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Hides debug banner
-      title: 'Login Page', // Sets app title
-      theme: ThemeData(primarySwatch: Colors.blue), // Sets theme color
-      home: LoginPage(), // Sets LoginPage as the initial screen
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeProvider.themeMode,
+      initialRoute: '/login', // Start with Login Page
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/user': (context) => HomePage(),
+      },
     );
   }
 }
-
 
 class CustomSnackBar {
   static void showSnackBar(BuildContext context, String message,

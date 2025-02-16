@@ -8,8 +8,13 @@ class ProductProvider with ChangeNotifier {
   int get quantity => _quantity;
 
   void addToCart() {
+    _quantity--;
+    notifyListeners();
+  }
+
+  void removeFromCart() {
     if (_quantity > 0) {
-      _quantity--;
+      _quantity++;
       notifyListeners();
     }
   }
