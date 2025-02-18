@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 
@@ -20,6 +21,11 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text;
       String password = _passwordController.text;
+  CollectionReference collRef = FirebaseFirestore.instance.collection('Client');
+  collRef.add({
+    'email': email,
+    'password': password,
+  });
 
       // Check if email and password match predefined values
       if (email == "admin@example.com" && password == "123456") {
